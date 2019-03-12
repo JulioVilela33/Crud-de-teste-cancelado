@@ -1,0 +1,73 @@
+﻿@model IEnumerable<CrudTeste.Models.Entidades.Pessoa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<p>
+    <a asp-action="Create" asp-controller="PessoasFisicas">Adicionar Pessoa Fisica</a>
+    <a asp-action="Create" asp-controller="PessoasJuridicas">Adicionar Pessoa Juridica</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Data)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelNumero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Documento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TelNumero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                if (item is PessoaJuridica)
+                {
+                <div>
+                    <a asp-controller="PessoasJuridicas" asp-action="Edit" asp-route-id="@item.PessoaId">Edit</a> |
+                    <a asp-controller="PessoasJuridicas" asp-action="Details" asp-route-id="@item.PessoaId">Details</a> |
+                    <a asp-controller="PessoasJuridicas" asp-action="Delete" asp-route-id="@item.PessoaId">Delete</a>
+                </div>
+                }
+                else if (item is PessoaFisica)
+                {
+                <div>
+                    <a asp-controller="PessoasFisicas" asp-action="Edit" asp-route-id="@item.PessoaId">Edit</a> |
+                    <a asp-controller="PessoasFisicas" asp-action="Details" asp-route-id="@item.PessoaId">Details</a> |
+                    <a asp-controller="PessoasFisicas" asp-action="Delete" asp-route-id="@item.PessoaId">Delete</a>
+                </div>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
